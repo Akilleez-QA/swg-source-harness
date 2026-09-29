@@ -24,9 +24,3 @@ python3 -m venv .venv
 ```
 
 On Windows use `.venv\Scripts\python.exe` in place of `.venv/bin/python`. These checks validate structure, not the quality of a model's reasoning. The behavioral evaluation cases are specifications; no model/provider evaluation is claimed by passing the capsule tests.
-
-## Provenance and privacy
-
-The skill was supplied by the harness owner for bundling. Its source manifest records upstream and bundled file digests and any packaging adaptations. The original local installation is not modified. The bundle excludes bytecode caches and contains generic examples, not user conversation history or live project state.
-
-The public skill was checked for personal usernames, machine paths, credentials, private endpoints and project-specific instructions. Generic sample paths and synthetic dates in fixtures are retained. No personal project material was found in the supplied text files. A portability adaptation removes Unix executable-bit requirements from structural validation because the documented invocation uses Python directly, including ZIP installations.
