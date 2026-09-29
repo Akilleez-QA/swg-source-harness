@@ -9,7 +9,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 SCHEMA = 'swg-local-preflight/v1'
 
 
@@ -108,6 +108,9 @@ def preflight(workspace, task):
             problems.append('Check %d needs a local evidence file and SHA-256.' % index)
             continue
         p = Path(evidence['path']).expanduser()
+        if not p.is_absolute():
+            problems.append('Check %d evidence path must be absolute.' % index)
+            continue
         expected = evidence.get('sha256')
         if not p.is_file() or p.is_symlink():
             problems.append('Check %d evidence file unavailable.' % index)
@@ -190,6 +193,9 @@ def main(argv=None):
         current = snapshot(args.workspace)
         if current != report.get('candidate') or not current['clean']:
             raise ValueError('Report is stale or workspace is dirty.')
+        if report.get('local_status') != 'preflight-complete' or report.get('problems') != []:
+            print('Local checksum and candidate match, but preflight is incomplete. Resolve reported problems and rerun check.')
+            return 1
         print('Local checksum and clean candidate match. Not a signature, test verification or project approval.')
         return 0
     except (ValueError, OSError, RecursionError, subprocess.SubprocessError) as exc:

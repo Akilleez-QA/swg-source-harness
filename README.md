@@ -2,7 +2,7 @@
 
 The canonical home of a community contribution harness for SWG Source: practical guides, shared agent instructions, review templates and a provider-neutral local preflight tool.
 
-**v0.1 is a usable starter harness, not a deployed project admission service.** It prepares evidence for review. It does not execute your tests, sign reports or grant review approval. This repository is maintained independently; SWG Source has not adopted or endorsed its proposed mandatory gate.
+**v0.1.1 is a usable starter harness, not a deployed project admission service.** It prepares evidence for review. It does not execute your tests, sign reports or grant review approval. This repository is maintained independently; SWG Source has not adopted or endorsed its proposed mandatory gate.
 
 ## Quick start
 
@@ -21,7 +21,7 @@ python3 harness.py check --workspace /path/to/your/repository --task /path/outsi
 python3 harness.py verify --workspace /path/to/your/repository --report /path/outside/repository/report.json
 ```
 
-Paths above are placeholders. Task/report outputs must be outside the inspected repository, and existing output files are never overwritten. Use a new report filename for each run. `check` returns 0 for structurally complete local evidence, 1 for missing/failed reported checks, and 2 for input/inspection errors. `verify` checks the report checksum and whether the clean Git candidate still matches; it does not authenticate the author or rerun evidence checks.
+Paths above are placeholders. Task/report outputs must be outside the inspected repository, and existing output files are never overwritten. Use a new report filename for each run. `check` returns 0 for structurally complete local evidence, 1 for missing/failed reported checks, and 2 for input/inspection errors. `verify` returns 1 for an incomplete report, 2 for invalid/stale input, and 0 only for a matching complete local report. It checks the report checksum and whether the clean Git candidate still matches; it does not authenticate the author or rerun evidence checks.
 
 Inspect only a workspace you trust, on a stable checkout without concurrent edits. Git can invoke locally configured filters; this CLI is not a sandbox for hostile repositories. Git cleanliness does not identify ignored configs, deployed binaries or runtime data; record those separately in your validation notes.
 

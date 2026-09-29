@@ -24,7 +24,7 @@ python3 harness.py verify --workspace /path/to/workspace --report /path/to/repor
 
 `check` performs **read-only static inspection of the workspace** and writes the requested report. It does not execute commands written in the task file, compile code, launch a server or client, run gameplay tests, install dependencies or update a database. Report fields describing contributor testing remain contributor-supplied evidence; their presence is not proof the tests ran or passed.
 
-`verify` checks the report against the current workspace according to the local implementation. It does not contact a trusted remote verifier or validate a maintainer-issued signature. A locally generated report is preparation evidence, not an official admission receipt. Read failures and limitations in the report and resolve or explain them; do not replace a failed result with narrative claims.
+`verify` returns a nonzero status for incomplete preflight, corrupt reports or stale candidates. It checks the report against the current workspace according to the local implementation. It does not contact a trusted remote verifier or validate a maintainer-issued signature. A locally generated report is preparation evidence, not an official admission receipt. Read failures and limitations in the report and resolve or explain them; do not replace a failed result with narrative claims.
 
 If source content or revisions change, generate a fresh report. Preserve older reports as evidence of the earlier candidate. The proposed intake policy requires new results for new commits; that future policy is not enforced by a project-approved service in this package.
 

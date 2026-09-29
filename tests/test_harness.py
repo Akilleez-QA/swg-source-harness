@@ -104,6 +104,21 @@ class HarnessCLITests(unittest.TestCase):
         self.task_path.write_bytes(b' ' * (2 * 1024 * 1024 + 1))
         self.cli('check', '--task', self.task_path, '--output', self.report_path, expected=2)
 
+    def test_verify_incomplete_report_is_not_success(self):
+        task = self.prepare_candidate()
+        task['checks'][0]['status'] = 'failed'
+        self.write(self.task_path, task)
+        self.cli('check', '--task', self.task_path, '--output', self.report_path, expected=1)
+        result = self.cli('verify', '--report', self.report_path, expected=1)
+        self.assertIn('incomplete', result.stdout)
+
+    def test_relative_evidence_path_is_rejected(self):
+        task = self.prepare_candidate()
+        task['checks'][0]['evidence']['path'] = 'README.md'
+        self.write(self.task_path, task)
+        self.cli('check', '--task', self.task_path, '--output', self.report_path, expected=1)
+        self.assertTrue(any('absolute' in p for p in self.read(self.report_path)['problems']))
+
     def test_init_records_baseline_but_does_not_invent_validation(self):
         self.cli('init', '--output', self.task_path)
         task = self.read(self.task_path)
