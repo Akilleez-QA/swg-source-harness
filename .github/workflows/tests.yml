@@ -12,12 +12,26 @@ jobs:
         include:
           - os: ubuntu-latest
             python: '3.9'
+            suite: 'test*.py'
           - os: ubuntu-latest
             python: '3.13'
+            suite: 'test*.py'
           - os: windows-latest
             python: '3.11'
+            suite: 'test_harness.py'
+          - os: windows-latest
+            python: '3.11'
+            suite: 'test_adversarial*.py'
+          - os: windows-latest
+            python: '3.11'
+            suite: 'test_packaging.py'
+          - os: windows-latest
+            python: '3.11'
+            suite: 'test_[rsu]*.py'
           - os: macos-latest
             python: '3.11'
+            suite: 'test*.py'
+    timeout-minutes: 10
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +39,6 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements-poodo.txt
-      - run: python -m unittest discover -s tests -v
+      - run: python -m unittest discover -s tests -p '${{ matrix.suite }}' -v
       - run: python skills/poodo/scripts/validate_skill.py
       - run: python -m unittest discover -s skills/poodo/evals -v
