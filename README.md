@@ -67,7 +67,7 @@ python3 -m unittest discover -s tests -v
 python3 tools/package.py
 ```
 
-Packaging requires a Git source checkout with committed tracked changes. It reads immutable committed blobs, embeds the commit in RELEASE.json, and refuses unsupported symlinks or reuse of a version with different contents. The ZIP includes no Git history. An extracted ZIP can run the CLI and core tests but needs a Git source checkout to rebuild a release. Inspect the archive before distributing. Python tests exercise disposable repositories, not a live game server.
+The complete test suite requires a Git source checkout; extracted ZIPs skip the packaging-only tests. Packaging requires a Git source checkout with committed tracked changes. It reads immutable committed blobs, embeds the commit in RELEASE.json, and refuses unsupported symlinks or reuse of a version with different contents. The ZIP includes no Git history. An extracted ZIP can run the CLI and core tests but needs a Git source checkout to rebuild a release. Inspect the archive before distributing. Python tests exercise disposable repositories, not a live game server.
 
 ## Project status
 

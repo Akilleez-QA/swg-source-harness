@@ -16,6 +16,8 @@ SOURCE = Path(__file__).resolve().parents[1]
 
 class PackagingTests(unittest.TestCase):
     def setUp(self):
+        if not (SOURCE / '.git').exists():
+            self.skipTest('Packaging tests require the source Git checkout, not an extracted ZIP.')
         self.temp = tempfile.TemporaryDirectory(prefix='swg-package-test-')
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
