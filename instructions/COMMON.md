@@ -14,3 +14,5 @@ Use these as task guidance within the user's authorization and your host tool's 
 10. Handoff goal, revision, changes, tests/results, failed attempts that matter, remaining gaps and next check. State the strongest conclusion the evidence actually supports.
 
 This adapts POODO's practical lessons; it does not claim full POODO execution or impose its complete process on every edit. Current project rules and task-specific guidance should be checked at the source.
+
+At the start of a harness-assisted session, run `python3 harness.py updates` from the harness directory if update checks are allowed. It uses the same daily cache as the CLI hook. Never install an update automatically; preserve user work and follow the release instructions. Respect `SWG_HARNESS_UPDATE_CHECK=0`.

@@ -90,4 +90,4 @@ Historical examples help select checks; they are not universal fixes:
 - A contributor [reported an AI change bypassing an existing batch/queue](https://discord.com/channels/366560008068005892/567731005725737011/1549787950076657715). The archive did not supply a patch or scaling benchmark.
 - A generated conversation [compiled and attached but failed interaction](https://discord.com/channels/366560008068005892/694859723513659463/748649720343298139). This was a tool-generated code example, not a demonstrated generative-AI failure.
 
-POODO source for this adaptation: the locally supplied skill and its epistemic-integrity, contradiction-protocol and continuity-and-ledger references. The skill is not an SWG Source community policy or a required installed tool.
+The [full POODO skill](../skills/poodo/SKILL.md) and [setup instructions](../skills/README.md) are bundled. This quick guide adapts its epistemic-integrity, contradiction-protocol and continuity-and-ledger references. The skill is not an SWG Source community policy or a required installed tool.

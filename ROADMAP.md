@@ -1,8 +1,8 @@
 # Roadmap
 
-## Delivered in 0.1
+## Delivered in 0.2
 
-Curated guides, provider-neutral instructions, PR template, local Git identity/evidence checks, stale report detection and reproducible packaging. Local tests are contributor reports; no game runtime validation or trusted approval.
+Curated guides, full POODO skill, provider-neutral instructions, PR template, strict local report validation, recursive Git identity checks and packaging from committed blobs. Local tests are contributor reports; no game runtime validation or trusted approval.
 
 ## Next milestones
 

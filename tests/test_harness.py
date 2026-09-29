@@ -25,7 +25,7 @@ class HarnessCLITests(unittest.TestCase):
             if key.startswith('GIT_'):
                 del self.env[key]
         self.env.update(GIT_CONFIG_NOSYSTEM='1', GIT_CONFIG_GLOBAL=os.devnull,
-                        GIT_TERMINAL_PROMPT='0')
+                        SWG_HARNESS_UPDATE_CHECK='0', GIT_TERMINAL_PROMPT='0')
         self.git('init', '--quiet')
         self.git('config', 'user.name', 'Harness Test')
         self.git('config', 'user.email', 'harness-test@example.invalid')
@@ -92,7 +92,10 @@ class HarnessCLITests(unittest.TestCase):
     def test_symlink_evidence_is_rejected(self):
         task = self.prepare_candidate()
         link = self.root / 'evidence-link.txt'
-        link.symlink_to(self.evidence_path)
+        try:
+            link.symlink_to(self.evidence_path)
+        except (OSError, NotImplementedError):
+            self.skipTest('Symlinks unavailable')
         task['checks'][0]['evidence']['path'] = str(link)
         self.write(self.task_path, task)
         self.cli('check', '--task', self.task_path, '--output', self.report_path, expected=1)
@@ -118,6 +121,12 @@ class HarnessCLITests(unittest.TestCase):
         self.write(self.task_path, task)
         self.cli('check', '--task', self.task_path, '--output', self.report_path, expected=1)
         self.assertTrue(any('absolute' in p for p in self.read(self.report_path)['problems']))
+
+    def test_update_command_needs_no_workspace_and_respects_disable(self):
+        result = subprocess.run([sys.executable, str(HARNESS), 'updates', '--force'],
+                                capture_output=True, text=True, env=self.env, timeout=5)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('No update notice', result.stdout)
 
     def test_init_records_baseline_but_does_not_invent_validation(self):
         self.cli('init', '--output', self.task_path)

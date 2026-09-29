@@ -11,6 +11,9 @@ These guides combine public project sources, archived troubleshooting and POODO-
 | What you want to do | Guide |
 |---|---|
 | Find the project, choose a setup or make a first contribution | [Getting started](getting-started.md) |
+| Understand the stock server source and processes | [Stock server](stock-server.md) |
+| Understand the stock client build and runtime | [Stock client](stock-client.md) |
+| Trace a change across repositories | [Change routing](change-routing.md) |
 | Build, change content or investigate a failure | [Building and debugging](building-and-debugging.md) |
 | Pick up useful habits | [Tips and tricks](tips-and-tricks.md) |
 | Ask for help, choose a channel or help another contributor | [Community and support](community-and-support.md) |
