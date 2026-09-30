@@ -8,6 +8,10 @@
 
 [Approach, scope and important tradeoff. Link related issues/PRs and compatible revisions where needed. Identify required generated artifacts and their authored sources.]
 
+## Architecture and preservation
+
+[For consequential changes: identify the owning component and integration point, relevant precedent, behavior intentionally preserved, and any deviation or unresolved coupling. Delete this section when it is not applicable.]
+
 ## Local preflight
 
 [Report link, evaluated commit/workspace identity and harness version. State limitations. A local report is not a trusted project admission receipt or proof of correctness.]

@@ -16,6 +16,12 @@ python3 harness.py init --workspace /path/to/your/repository --output /path/outs
 
 Initialize before making changes: the template records the current commit as your base. Alternatively set `base` to the full commit ID you are proposing changes against. Work in your own branch. Fill in the task's objective, environment, expected behavior and separate AI disclosures. Perform the relevant checks, then record their actual results, the tested full commit ID, and the absolute local evidence-file path plus SHA-256. Commit your contribution before final preflight.
 
+The generated task also contains an optional `change_review` scaffold. Leave its
+`required` field false for narrow work. Set it true for consequential changes to
+record scope, preserved behavior, affected surfaces, companion revisions,
+ownership, precedents, player-visible effects, unknowns and final-diff notes.
+Existing `swg-task/v1` files without this additive block remain supported.
+
 ```sh
 python3 harness.py check --workspace /path/to/your/repository --task /path/outside/repository/task.json --output /path/outside/repository/report.json
 python3 harness.py verify --workspace /path/to/your/repository --report /path/outside/repository/report.json
@@ -50,6 +56,8 @@ For the full explicit reasoning workflow, use the [bundled POODO skill and setup
 
 - [Stock server](docs/stock-server.md), [stock client](docs/stock-client.md), and [cross-repository change routing](docs/change-routing.md): source-backed maps with pinned upstream revisions.
 - [Getting started and community guides](docs/README.md): repositories, setup routes, useful questions, testing, documentation and PR standards.
+- [Architecture and intent review](docs/architecture-and-intent-review.md): a conditional checklist for ownership, preservation, player-visible behavior and final-diff review.
+- [Example workspace layout](docs/example-workspace-layout.md): a machine-neutral separation of reference, working, generated, staging and evidence lanes.
 - [AI-assisted work](docs/ai-assisted-work.md): evidence discipline, bounded parallel work and POODO-derived lessons.
 - [PR template](templates/pr.md): concise problem/change/evidence/disclosure notes.
 - `harness.py`: read-only Git inspection and local evidence preflight; never executes commands supplied in task JSON.

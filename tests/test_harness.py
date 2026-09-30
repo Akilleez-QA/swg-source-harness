@@ -133,9 +133,42 @@ class HarnessCLITests(unittest.TestCase):
         task = self.read(self.task_path)
         self.assertEqual(task['schema'], 'swg-task/v1')
         self.assertEqual(task['base'], self.base)
+        self.assertFalse(task['change_review']['required'])
+        self.assertEqual(task['change_review']['affected_surfaces'], [])
+        self.assertEqual(task['change_review']['companion_revisions'], [])
         self.assertEqual(task['checks'][0]['status'], 'not-run')
         self.assertEqual(task['checks'][0]['tested_commit'], '')
         self.assertEqual(self.git('status', '--porcelain'), '')
+
+    def test_change_review_is_optional_and_conditionally_complete(self):
+        task = self.prepare_candidate()
+        legacy = dict(task)
+        del legacy['change_review']
+        self.write(self.task_path, legacy)
+        self.cli('check', '--task', self.task_path,
+                 '--output', self.root / 'legacy-report.json')
+
+        task['change_review']['required'] = True
+        self.write(self.task_path, task)
+        incomplete = self.root / 'incomplete-review.json'
+        self.cli('check', '--task', self.task_path, '--output', incomplete, expected=1)
+        problems = self.read(incomplete)['problems']
+        self.assertIn('Complete change_review field: scope', problems)
+        self.assertIn('List at least one affected surface in change_review.', problems)
+
+        task['change_review'].update(
+            scope='Update the feature behavior only',
+            preserved_behavior='Keep the existing neighboring path unchanged',
+            affected_surfaces=['script/game-logic'],
+            companion_revisions=[],
+            owner_and_integration='Existing feature owner and event path',
+            precedents_and_alternatives='Compared the neighboring event path; no parallel manager',
+            risks_and_unknowns='No remaining material unknowns in this fixture',
+            player_visible_effects='Corrected result; no timing or feedback change',
+            final_diff_notes='Final diff matches the selected owner and preservation boundary')
+        self.write(self.task_path, task)
+        self.cli('check', '--task', self.task_path,
+                 '--output', self.root / 'complete-review.json')
 
     def test_unfilled_template_reports_missing_information(self):
         self.cli('init', '--output', self.task_path)

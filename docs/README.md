@@ -14,6 +14,8 @@ These guides combine public project sources, archived troubleshooting and POODO-
 | Understand the stock server source and processes | [Stock server](stock-server.md) |
 | Understand the stock client build and runtime | [Stock client](stock-client.md) |
 | Trace a change across repositories | [Change routing](change-routing.md) |
+| Review architecture, intent and preserved behavior | [Architecture and intent review](architecture-and-intent-review.md) |
+| Separate reference, working, generated and evidence files locally | [Example workspace layout](example-workspace-layout.md) |
 | Build, change content or investigate a failure | [Building and debugging](building-and-debugging.md) |
 | Pick up useful habits | [Tips and tricks](tips-and-tricks.md) |
 | Ask for help, choose a channel or help another contributor | [Community and support](community-and-support.md) |
