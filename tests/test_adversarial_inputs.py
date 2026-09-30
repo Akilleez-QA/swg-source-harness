@@ -109,6 +109,23 @@ class AdversarialInputsTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
                 self.assertNotIn('Traceback', result.stderr)
 
+    def test_invalid_change_review_shapes_remain_incomplete(self):
+        original = self.prepare_candidate()
+        variants = [None, [], {'required': 'yes'},
+                    {'required': False, 'affected_surfaces': 'scripts',
+                     'companion_revisions': []},
+                    {'required': False, 'affected_surfaces': [],
+                     'companion_revisions': [12]}]
+        for index, review in enumerate(variants):
+            with self.subTest(review=review):
+                task = json.loads(json.dumps(original))
+                task['change_review'] = review
+                self.write(self.task_path, task)
+                result = self.raw_cli('check', '--task', self.task_path,
+                                      '--output', self.root / ('review-%d.json' % index))
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertNotIn('Traceback', result.stderr)
+
     def test_symlink_evidence_is_rejected(self):
         task = self.prepare_candidate()
         link = self.root / 'linked-evidence'
@@ -157,6 +174,7 @@ class AdversarialInputsTests(unittest.TestCase):
         secret = 'PRIVATE_FIXTURE_VALUE_DO_NOT_PUBLISH_43728'
         self.evidence_path.write_text(secret)
         task['environment'] = secret
+        task['change_review']['risks_and_unknowns'] = secret
         task['checks'][0]['command_or_steps'] = secret
         task['checks'][0]['observed'] = secret
         task['checks'][0]['evidence']['sha256'] = hashlib.sha256(

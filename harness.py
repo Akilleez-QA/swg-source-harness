@@ -101,6 +101,31 @@ def preflight(workspace, task):
     for field in ('repository', 'goal', 'expected_behavior', 'environment', 'base', 'ai_contribution', 'ai_pr_text'):
         if not valid_text(task.get(field)):
             problems.append('Complete task field: ' + field)
+    if 'change_review' in task:
+        review = task['change_review']
+        if not isinstance(review, dict):
+            problems.append('change_review must be an object when provided.')
+        else:
+            required = review.get('required')
+            if not isinstance(required, bool):
+                problems.append('change_review.required must be true or false.')
+            text_fields = ('scope', 'preserved_behavior', 'owner_and_integration',
+                           'precedents_and_alternatives', 'risks_and_unknowns',
+                           'player_visible_effects', 'final_diff_notes')
+            for field in text_fields:
+                value = review.get(field)
+                if value is not None and not isinstance(value, str):
+                    problems.append('change_review.%s must be text.' % field)
+                elif required is True and not valid_text(value):
+                    problems.append('Complete change_review field: ' + field)
+            surfaces = review.get('affected_surfaces')
+            if not isinstance(surfaces, list) or not all(valid_text(x) for x in surfaces):
+                problems.append('change_review.affected_surfaces must be a list of non-empty strings.')
+            elif required is True and not surfaces:
+                problems.append('List at least one affected surface in change_review.')
+            companions = review.get('companion_revisions')
+            if not isinstance(companions, list) or not all(valid_text(x) for x in companions):
+                problems.append('change_review.companion_revisions must be a list of non-empty strings.')
     if identity['index_flags']:
         problems.append('Index assume-unchanged/skip-worktree flags prevent clean inspection; use a full checkout without these flags.')
     if not identity['clean']:
@@ -293,7 +318,14 @@ def main(argv=None):
             identity = snapshot(args.workspace)
             task = {'schema': 'swg-task/v1', 'repository': '', 'base': identity['head'],
                     'goal': '', 'expected_behavior': '', 'environment': '',
-                    'ai_contribution': '', 'ai_pr_text': '', 'checks': [{
+                    'ai_contribution': '', 'ai_pr_text': '',
+                    'change_review': {
+                        'required': False, 'scope': '', 'preserved_behavior': '',
+                        'affected_surfaces': [], 'companion_revisions': [],
+                        'owner_and_integration': '', 'precedents_and_alternatives': '',
+                        'risks_and_unknowns': '', 'player_visible_effects': '',
+                        'final_diff_notes': ''},
+                    'checks': [{
                         'name': '', 'command_or_steps': '', 'expected': '', 'observed': '',
                         'status': 'not-run', 'tested_commit': '',
                         'evidence': {'path': '', 'sha256': ''}}]}

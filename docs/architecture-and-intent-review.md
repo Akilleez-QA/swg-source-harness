@@ -32,6 +32,33 @@ Implementation assumptions and unresolved questions:
 Acceptance checks:
 ```
 
+`harness.py init` includes the same concerns in an optional `change_review`
+object. Leave `required` false for a narrow change that does not need this
+review. Set it true for a consequential change and complete the generated
+fields before local preflight:
+
+```json
+{
+  "change_review": {
+    "required": true,
+    "scope": "Behavior and explicit exclusions",
+    "preserved_behavior": "Nearby behavior that must remain unchanged",
+    "affected_surfaces": ["script/game-logic", "persistence"],
+    "companion_revisions": ["related-repository@full-commit: reason it matters"],
+    "owner_and_integration": "Owning component and existing integration path",
+    "precedents_and_alternatives": "Comparable paths and rejected shortcuts",
+    "risks_and_unknowns": "Remaining uncertainty or none known within scope",
+    "player_visible_effects": "Mechanics, feedback, timing and recovery effects",
+    "final_diff_notes": "Alignment, deviations and newly discovered coupling"
+  }
+}
+```
+
+The scaffold is contributor-supplied context. Local preflight checks its shape
+and completeness when required and binds the task digest to the candidate; it
+does not verify the statements or publish their contents in the report. Older
+`swg-task/v1` files without this object remain valid.
+
 Silence does not turn an implementation assumption into a project decision. If
 a consequential question remains unresolved, present the alternatives and their
 effects before building one of them into a large patch.

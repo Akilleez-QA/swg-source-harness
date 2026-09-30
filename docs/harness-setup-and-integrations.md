@@ -13,7 +13,7 @@ python3 harness.py init --workspace /path/to/workspace --output /path/to/task.js
 python3 harness.py inspect --workspace /path/to/workspace
 ```
 
-`init` writes a task file at the chosen output location. Edit it to describe your objective, scope, acceptance criteria and other requested fields. `inspect` reports the discovered workspace. Confirm that it identifies the intended checkout and revisions before relying on the result. Consult `python3 harness.py --help` and each subcommand's help for the supported arguments.
+`init` writes a task file at the chosen output location. Edit it to describe your objective, environment, expected behavior and checks. It also includes an optional `change_review` scaffold for scope, preservation, affected surfaces, companion revisions, ownership, precedents, player-visible effects, uncertainty and final-diff review. Leave `required` false for a narrow change; set it true and complete the scaffold when the [architecture and intent review](architecture-and-intent-review.md) applies. Older `swg-task/v1` files without this additive object remain valid. `inspect` reports the discovered workspace. Confirm that it identifies the intended checkout and revisions before relying on the result. Consult `python3 harness.py --help` and each subcommand's help for the supported arguments.
 
 After preparing your change and task record:
 
