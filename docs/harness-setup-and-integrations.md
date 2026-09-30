@@ -4,6 +4,11 @@
 
 The package contains a Python 3 standard-library CLI, task/report files and community guides. You do not need an AI subscription, API key or provider adapter. Use a human editor or any authoring assistant; the local checks inspect the resulting workspace and task record.
 
+The [example workspace layout](example-workspace-layout.md) shows one portable
+way to keep reference source, writable candidate source, generated output, test
+staging and private evidence in separate lanes. The directory names are examples,
+not configuration required by the CLI.
+
 ## What the commands do
 
 Run from the unpacked harness directory in a terminal with Python 3 and Git available. Use the actual workspace path and choose task/report output files outside the source workspace so collecting evidence does not change the candidate being inspected. Paths below are placeholders; replace them before running.
