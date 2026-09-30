@@ -50,6 +50,7 @@ For the full explicit reasoning workflow, use the [bundled POODO skill and setup
 
 - [Stock server](docs/stock-server.md), [stock client](docs/stock-client.md), and [cross-repository change routing](docs/change-routing.md): source-backed maps with pinned upstream revisions.
 - [Getting started and community guides](docs/README.md): repositories, setup routes, useful questions, testing, documentation and PR standards.
+- [Architecture and intent review](docs/architecture-and-intent-review.md): a conditional checklist for ownership, preservation, player-visible behavior and final-diff review.
 - [AI-assisted work](docs/ai-assisted-work.md): evidence discipline, bounded parallel work and POODO-derived lessons.
 - [PR template](templates/pr.md): concise problem/change/evidence/disclosure notes.
 - `harness.py`: read-only Git inspection and local evidence preflight; never executes commands supplied in task JSON.

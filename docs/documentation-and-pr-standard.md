@@ -98,6 +98,10 @@ Keep useful logs and screenshots focused. Link a reproducible test or short evid
 [Approach and important tradeoff. Related issues/PRs and source/generated
 artifacts where relevant.]
 
+## Architecture and preservation
+[For consequential changes: owning component and integration point, relevant
+precedent, behavior preserved, and unresolved coupling. Delete if not applicable.]
+
 ## Harness intake (proposed adoption requirement)
 Result: [link/status], evaluated commit: [SHA], harness version: [version].
 
