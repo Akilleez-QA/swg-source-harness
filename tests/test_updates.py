@@ -110,7 +110,9 @@ class UpdateTests(unittest.TestCase):
         self.payload([release('v1.1.0')])
         updates.check_updates('1.0.0')
         self.payload([release('v1.2.0')])
-        with patch('update_check.os.open', side_effect=PermissionError):
+        # Fail only the cache write. Patching os.open would also break tempfile, which on
+        # Windows retries PermissionError up to TMP_MAX times and hangs the job.
+        with patch('update_check.tempfile.NamedTemporaryFile', side_effect=PermissionError):
             self.assertIn('v1.2.0', updates.check_updates('1.0.0', force=True))
 
     def test_cache_symlink_does_not_modify_external_file(self):
