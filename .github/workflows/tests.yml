@@ -2,6 +2,8 @@ name: Harness tests
 on: [push, pull_request]
 env:
   SWG_HARNESS_UPDATE_CHECK: '0'
+  # Windows runners default to cp1252; the bundled POODO files are UTF-8.
+  PYTHONUTF8: '1'
 permissions:
   contents: read
 jobs:
