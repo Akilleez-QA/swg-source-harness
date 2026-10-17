@@ -1,5 +1,15 @@
 # SWG Source Contribution Harness
 
+[![Harness tests](https://img.shields.io/github/actions/workflow/status/Akilleez-QA/swg-source-harness/tests.yml?branch=main&style=flat-square&label=tests)](https://github.com/Akilleez-QA/swg-source-harness/actions/workflows/tests.yml)
+[![Latest release](https://img.shields.io/github/v/release/Akilleez-QA/swg-source-harness?include_prereleases&style=flat-square)](https://github.com/Akilleez-QA/swg-source-harness/releases)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)](harness.py)
+[![No dependencies](https://img.shields.io/badge/deps-stdlib_only-2ea44f?style=flat-square)](harness.py)
+[![Platforms](https://img.shields.io/badge/os-Linux%20%7C%20macOS%20%7C%20Windows-555?style=flat-square)](.github/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/github/license/Akilleez-QA/swg-source-harness?style=flat-square)](LICENSE)
+
+> **Show your work before you open the PR.** A zero-dependency preflight CLI, guides and agent instructions for contributing to SWG Source with any model or none.
+
+
 The canonical home of a community contribution harness for SWG Source: practical guides, shared agent instructions, review templates and a provider-neutral local preflight tool.
 
 **v0.2.0 is a usable starter harness, not a deployed project admission service.** It prepares evidence for review. It does not execute your tests, sign reports or grant review approval. This repository is maintained independently; SWG Source has not adopted or endorsed its proposed mandatory gate.
