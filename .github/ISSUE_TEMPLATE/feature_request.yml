@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose an improvement to the harness, guides, or bundled skills.
+title: '[Feature]: '
+body:
+  - type: markdown
+    attributes:
+      value: 'See CONTRIBUTING.md. Discuss provider adapters, trust/signing changes, and gate architecture before substantial implementation. Do not include secrets, private archives, account data, or personal information.'
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and concrete use case
+      description: Explain the unmet need and a concrete example. What existing command, guide, or workflow did you try?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and scope
+      description: Describe the change and where it belongs in the CLI, guides, templates, or bundled skills. Keep the proposal focused on one concern.
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Limits, compatibility, and validation
+      description: Include privacy or trust implications, affected task/report formats, migration impact, and a way to verify the behavior. Unknowns are fine. Local self-reports must not be treated as trusted approval.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and tradeoffs

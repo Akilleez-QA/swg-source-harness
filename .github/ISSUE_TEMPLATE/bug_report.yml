@@ -1,0 +1,33 @@
+name: Bug report
+description: A reproducible harness, guide, or bundled skill defect.
+title: '[Bug]: '
+body:
+  - type: markdown
+    attributes:
+      value: 'Report problems with this contribution harness here. See CONTRIBUTING.md. Do not post secrets, private archives, account data, or personal information. Send sensitive reports to craig@nh3.biz.'
+  - type: textarea
+    id: problem
+    attributes:
+      label: Expected and actual behavior
+      description: Explain what should happen and what happens instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include exact steps and commands, or the affected guide and section. Use a small example with private data removed.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Version and environment
+      description: Harness version or commit, OS, Python and Git versions. For bundled skill problems, include the skill version and relevant tool versions.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Relevant error output, sanitized task/report excerpts, or measured results. Review all attachments for private paths and sensitive data before sharing.
