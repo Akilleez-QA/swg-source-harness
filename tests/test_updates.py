@@ -110,8 +110,10 @@ class UpdateTests(unittest.TestCase):
         self.payload([release('v1.1.0')])
         updates.check_updates('1.0.0')
         self.payload([release('v1.2.0')])
-        with patch('update_check.os.open', side_effect=PermissionError):
+        with patch('update_check.tempfile.NamedTemporaryFile', side_effect=PermissionError) as cache_write:
             self.assertIn('v1.2.0', updates.check_updates('1.0.0', force=True))
+        cache_write.assert_called()
+        self.assertEqual(self.network.call_count, 2)
 
     def test_cache_symlink_does_not_modify_external_file(self):
         target = self.root / 'private.txt'

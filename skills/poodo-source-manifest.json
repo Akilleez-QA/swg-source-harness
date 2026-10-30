@@ -55,10 +55,10 @@
     "references/semantic-topology.md": "8982021a5713efc1123297877a40934901a722045c4eac11592cf414cbf6a644",
     "requirements.txt": "8cfee9dfcaa8a2a3872ddc8c4fe0decab91c07d2804d5620209770ecdae33be6",
     "scripts/check_capsule.py": "f7aea0efe590b7de3ace7c9aea0c7b85f9f07d22e7ff579be91e5fb71f36bc15",
-    "scripts/validate_skill.py": "1ac833e7c9d16dfe495b9bff08fbcf9c0cc31f08792b672f7fd472ecb548d89e"
+    "scripts/validate_skill.py": "2f4fa72e38157f13057a07799255c2a70435b713beaf3de81336b5aaad03b296"
   },
   "adaptations": {
-    "scripts/validate_skill.py": "Removed Unix executable-bit requirement; scripts are invoked using Python, including extracted ZIPs and Windows.",
+    "scripts/validate_skill.py": "Removed Unix executable-bit requirement; scripts are invoked using Python, including extracted ZIPs and Windows. Read package text explicitly as UTF-8 on every platform.",
     "README.md": "Added standalone setup and dependency instructions.",
     "requirements.txt": "Added optional PyYAML dependency pin.",
     "evals/manifest.yaml": "Removed extra blank lines at end of file; content unchanged.",

@@ -48,7 +48,7 @@ def main() -> int:
     skill_path = ROOT / "SKILL.md"
     if skill_path.is_file():
         try:
-            meta = frontmatter(skill_path.read_text())
+            meta = frontmatter(skill_path.read_text(encoding="utf-8"))
             if meta.get("name") != "poodo":
                 errors.append("frontmatter name must be poodo")
             if str(meta.get("metadata", {}).get("version")) != "3.0":
@@ -59,7 +59,7 @@ def main() -> int:
     config_path = ROOT / "agents" / "openai.yaml"
     if config_path.is_file():
         try:
-            config = yaml.safe_load(config_path.read_text())
+            config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
             interface = config.get("interface", {})
             policy = config.get("policy", {})
             short = interface.get("short_description", "")
@@ -76,7 +76,7 @@ def main() -> int:
     for path in markdown:
         if not path.is_file():
             continue
-        text = path.read_text()
+        text = path.read_text(encoding="utf-8")
         for target in re.findall(r"\[[^]]+\]\(([^)]+\.md)\)", text):
             if not (path.parent / target).resolve().is_file():
                 errors.append(f"broken reference in {path.relative_to(ROOT)}: {target}")
@@ -85,7 +85,7 @@ def main() -> int:
 
     continuity = ROOT / "references" / "continuity-and-ledger.md"
     if continuity.is_file():
-        body = continuity.read_text()
+        body = continuity.read_text(encoding="utf-8")
         for literal in ("POODO_CONTINUATION/3.0", "POODO_CONTINUATION_V3_0", "END_POODO_CONTINUATION_V3_0"):
             if literal not in body:
                 errors.append(f"continuation schema missing {literal}")
