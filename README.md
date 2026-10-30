@@ -73,8 +73,4 @@ The complete test suite requires a Git source checkout; extracted ZIPs skip the 
 
 The desired future filter admits only submissions with verified evidence for the current revision to human review. It must first gain maintainer adoption, trusted execution infrastructure and a measured pilot. Local preflight is preparation for that filter, not a replacement. Questions and design discussions should remain open to newcomers.
 
-The original harness code and authored guides are licensed under GPL-3.0-only. Referenced SWG source, game assets, external documentation and community messages retain their own terms; this package includes no game source, binaries, credentials or raw Discord exports.
-
-## Commercial licensing
-
-This project is available under the GNU General Public License v3.0 only (GPL-3.0-only). If you want to use it in a product or service under different terms, commercial licenses are available from Refrigeration.AI. Contact craig@nh3.biz.
+The original harness code and authored guides are MIT licensed. Referenced SWG source, game assets, external documentation and community messages retain their own terms; this package includes no game source, binaries, credentials or raw Discord exports.
